@@ -95,8 +95,8 @@ export default function Navmenu() {
 
           <div
             className={`${
-              showMenu ? "block" : "hidden"
-            } absolute z-50 top-20 right-0 transition-all duration-300 bg-[whitesmoke] w-[80%] py-6 px-5 rounded-bl`}
+              showMenu ? "block z-50" : "hidden"
+            } absolute top-20 right-0 transition-all duration-300 bg-[whitesmoke] w-[80%] py-6 px-5 rounded-bl`}
           >
             <div className="flex flex-col gap-4">
               {items.map((menu, index) => (
