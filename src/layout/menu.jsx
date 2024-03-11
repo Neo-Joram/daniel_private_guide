@@ -121,9 +121,7 @@ export default function Navmenu() {
       ) : (
         <div
           className={`shadow flex items-center justify-between py-6 px-20 ${
-            isNavbarFixed
-              ? "fixed w-full bg-green-800 bg-opacity-90 text-white"
-              : ""
+            isNavbarFixed ? "fixed w-full bg-blue-200/90 " : ""
           }`}
         >
           <div>
