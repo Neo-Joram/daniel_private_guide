@@ -4,7 +4,7 @@ import { Profile, Career, Navmenu } from ".";
 
 export default function Header() {
   return (
-    <div className={`relative pb-14`}>
+    <div className={`relative pb-14 `}>
       <Navmenu />
       <Profile />
       <Career />
