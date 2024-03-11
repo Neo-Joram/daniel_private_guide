@@ -5,7 +5,7 @@ import pkgMovie from "../assets/pexels_video.mp4";
 import ReactPlayer from "react-player";
 
 export default function Videos() {
-  const { laptop } = useContext(stateContext);
+  const { laptop, mobile } = useContext(stateContext);
 
   const packages = [
     { image: fire, title: "Visit Rwanda", text: "A 10 day experience" },
@@ -20,13 +20,13 @@ export default function Videos() {
   return (
     <div
       className={`${
-        laptop ? "px-40 py-14" : "px-64 py-16"
-      }  bg-orange-100 bg-opacity-15`}
+        laptop ? "px-40 py-14" : mobile ? "px-4" : "px-64 py-16"
+      } py-14 bg-orange-100 bg-opacity-15`}
     >
       <div className="w-full text-center font-semibold text-4xl pb-10">
         Your Packages
       </div>
-      <div className="grid grid-cols-3 gap-14">
+      <div className={`grid ${mobile ? "" : " grid-cols-3"} gap-14`}>
         {packages.map((pkg, index) => (
           <div key={index} className={`flex flex-col text-center`}>
             {pkg.video ? (

@@ -5,7 +5,7 @@ import { FaChalkboardTeacher } from "react-icons/fa";
 import { stateContext } from "../stateContext";
 
 export default function Services() {
-  const { laptop } = useContext(stateContext);
+  const { laptop, mobile } = useContext(stateContext);
 
   const services = [
     {
@@ -29,23 +29,25 @@ export default function Services() {
     },
   ];
 
+  // console.log(laptop ? "px-40" : mobile ? "px-10" : "px-60");
+
   return (
     <div
       className={`${
-        laptop ? "px-40" : "px-60"
-      }  py-14 bg-green-800 bg-opacity-25`}
+        laptop ? "px-40" : mobile ? "px-4" : "px-60"
+      } py-14 bg-green-800 bg-opacity-25`}
     >
-      <div className="w-full text-center font-semibold text-4xl pb-10">
+      <div className="w-full text-center font-semibold text-4xl pb-4">
         Services
       </div>
 
-      <div className="flex items-end gap-10">
+      <div className={`${mobile ? "flex flex-col" : "flex items-end"} gap-10`}>
         {services.slice(0, 3).map((service, index) => (
           <div
             key={index}
-            className={`${
-              service.main && "bg-green-800 bg-opacity-60"
-            } w-1/3 py-10 px-5 rounded-lg shadow-2xl`}
+            className={`${service.main && "bg-green-800 bg-opacity-60"} ${
+              mobile ? "" : " w-1/3"
+            } py-10 px-5 rounded-lg shadow-2xl`}
           >
             <div className={` w-full flex items-center justify-center`}>
               {service.icon}

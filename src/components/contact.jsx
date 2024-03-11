@@ -4,7 +4,7 @@ import { MdFacebook, MdMail } from "react-icons/md";
 import { FaInstagram, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 
 export default function Contact() {
-  const { laptop } = useContext(stateContext);
+  const { laptop, mobile } = useContext(stateContext);
 
   const social = [
     {
@@ -33,15 +33,24 @@ export default function Contact() {
   return (
     <div
       className={`${
-        laptop ? "px-40" : "px-80"
+        laptop ? "px-40" : mobile ? "px-4" : "px-80"
       }  py-14 bg-orange-200 bg-opacity-10`}
     >
       <div className="w-full text-center font-semibold text-4xl pb-10">
         Contact Us
       </div>
-      <div className="grid grid-cols-2 gap-28 items-center">
+
+      <div
+        className={`grid ${
+          mobile ? "gap-4 text-center" : "grid-cols-2 gap-28"
+        }  items-center`}
+      >
         <div className="flex flex-col gap-6">
-          <h3 className="text-3xl px-4 underline font-semibold text-gray-700">
+          <h3
+            className={`${
+              mobile ? "text-center" : "text-3xl px-4"
+            } underline font-semibold text-gray-700`}
+          >
             Get in touch
           </h3>
           <p>
@@ -50,35 +59,46 @@ export default function Contact() {
             aliquam, sequi repellendus, modi ab exercitationem quam assumenda
             ratione fugiat qui.
           </p>
-          <div className="flex items-center gap-3">
-            {social.map((social, index) => (
-              <a
-                href={social.link}
-                key={index}
-                className="hover:animate-pulse hover:border-orange-400 p-2 border-2 rounded-full"
-              >
-                {social.icon}
-              </a>
-            ))}
-          </div>
-          <div className="grid">
-            <span>
-              Tel:{" "}
-              <a href="tel:+250782555259" className="text-blue-600">
-                +250 782 555 259
-              </a>
-            </span>
-            <span>
-              Email:{" "}
-              <a href="mailto:neojoram12@gmail.com" className="text-blue-600">
-                neojoram12@gmail.com
-              </a>
-            </span>
-          </div>
+          {mobile ? null : (
+            <>
+              <div className="flex items-center gap-3">
+                {social.map((social, index) => (
+                  <a
+                    href={social.link}
+                    key={index}
+                    className="hover:animate-pulse hover:border-orange-400 p-2 border-2 rounded-full"
+                  >
+                    {social.icon}
+                  </a>
+                ))}
+              </div>
+              <div className="grid">
+                <span>
+                  Tel:{" "}
+                  <a href="tel:+250782555259" className="text-blue-600">
+                    +250 782 555 259
+                  </a>
+                </span>
+                <span>
+                  Email:{" "}
+                  <a
+                    href="mailto:neojoram12@gmail.com"
+                    className="text-blue-600"
+                  >
+                    neojoram12@gmail.com
+                  </a>
+                </span>
+              </div>
+            </>
+          )}
         </div>
 
         <div className="flex flex-col gap-4">
-          <span className="capitalize text-xl font-semibold text-gray-700">
+          <span
+            className={`${
+              mobile ? "underline" : " text-xl"
+            } capitalize font-semibold text-gray-700`}
+          >
             Send a message
           </span>
           <form className="flex flex-col gap-2">
@@ -105,6 +125,40 @@ export default function Contact() {
             </button>
           </form>
         </div>
+
+        {!mobile ? null : (
+          <>
+            <div
+              className={`${
+                mobile && "w-full flex items-center justify-center mt-2"
+              } flex items-center gap-3`}
+            >
+              {social.map((social, index) => (
+                <a
+                  href={social.link}
+                  key={index}
+                  className="hover:animate-pulse hover:border-orange-400 p-2 border-2 rounded-full"
+                >
+                  {social.icon}
+                </a>
+              ))}
+            </div>
+            <div className="grid">
+              <span>
+                Tel:{" "}
+                <a href="tel:+250782555259" className="text-blue-600">
+                  +250 782 555 259
+                </a>
+              </span>
+              <span>
+                Email:{" "}
+                <a href="mailto:neojoram12@gmail.com" className="text-blue-600">
+                  neojoram12@gmail.com
+                </a>
+              </span>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

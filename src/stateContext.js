@@ -7,9 +7,10 @@ export const stateContext = createContext();
 export const StateProvider = ({ children }) => {
   // Responsiveness
   const smMobile = useMediaQuery("(max-width: 375px)");
-  const mobile = useMediaQuery("(max-width: 800px)");
-  const tablet = useMediaQuery("(max-width: 1024px)");
-  const laptop = useMediaQuery("(max-width: 1660px)");
+  const mobile = useMediaQuery("(min-width: 376px) and (max-width: 800px)");
+  const tablet = useMediaQuery("(min-width: 801px) and (max-width: 1024px)");
+  const laptop = useMediaQuery("(min-width: 1025px) and (max-width: 1660px)");
+  const desktop = useMediaQuery("(min-width: 1661px)");
   const smHeight = useMediaQuery("(max-height: 600px)");
 
   const [currentMode, setCurrentMode] = useState("");
@@ -47,6 +48,7 @@ export const StateProvider = ({ children }) => {
     mobile,
     tablet,
     laptop,
+    desktop,
     smHeight,
 
     currentMode,
