@@ -19,13 +19,12 @@ import {
 } from "react-icons/fa";
 import { stateContext } from "../stateContext";
 
-let previousScrollY = 0;
-
 export default function Navmenu() {
   const { mobile, showMenu, setShowMenu } = useContext(stateContext);
   const [current, setCurrent] = useState(0);
   const [active, setActive] = useState(0);
   const [isNavbarFixed, setIsNavbarFixed] = useState(false);
+  const [previousScrollY, setPreviousScrollY] = useState(0);
 
   const items = [
     { label: "Home", key: "home", icon: <MdHomeMax className="text-xl" /> },
@@ -68,16 +67,16 @@ export default function Navmenu() {
     { label: "email", link: "", icon: <MdMail className="text-2xl" /> },
   ];
 
-  const handleScroll = () => {
-    const scrollY = window.scrollY;
-
-    const isScrollingUp = scrollY < previousScrollY;
-
-    setIsNavbarFixed(scrollY > 0 && !isScrollingUp);
-    previousScrollY = scrollY;
-  };
-
   useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+
+      const isScrollingUp = scrollY < previousScrollY;
+
+      setIsNavbarFixed(scrollY > 0 && !isScrollingUp);
+      setPreviousScrollY(scrollY);
+    };
+    
     const onScrollListener = window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", onScrollListener);
     // eslint-disable-next-line
@@ -121,7 +120,7 @@ export default function Navmenu() {
       ) : (
         <div
           className={`shadow flex items-center justify-between py-6 px-20 ${
-            isNavbarFixed ? "fixed w-full bg-blue-200 bg-opacity-90" : ""
+            isNavbarFixed ? "fixed w-full bg-green-800 bg-opacity-25" : ""
           }`}
         >
           <div>

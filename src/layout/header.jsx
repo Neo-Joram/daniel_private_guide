@@ -5,7 +5,7 @@ import giraffe from "../assets/animals/giraffe_3.jpg";
 
 export default function Header() {
   return (
-    <div className={`relative pb-14 overflow-hidden`}>
+    <div className={`relative pb-10 overflow-hidden`}>
       <Navmenu />
       <Profile />
       <Career />
