@@ -42,6 +42,7 @@ export const StateProvider = ({ children }) => {
   }, [setCurrentMode]);
 
   const [showMenu, setShowMenu] = useState(false);
+  const [active, setActive] = useState("/");
 
   const stateValues = {
     smMobile,
@@ -56,6 +57,8 @@ export const StateProvider = ({ children }) => {
 
     showMenu,
     setShowMenu,
+    active,
+    setActive,
   };
 
   return (

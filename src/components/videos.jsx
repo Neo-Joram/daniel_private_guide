@@ -2,33 +2,47 @@ import React, { useContext } from "react";
 import { stateContext } from "../stateContext";
 import fire from "../assets/forest-tree.jpeg";
 import pkgMovie from "../assets/pexels_video.mp4";
+import pkgMovie2 from "../assets/video(1080p).mp4";
 import ReactPlayer from "react-player";
 
 export default function Videos() {
   const { laptop, mobile } = useContext(stateContext);
 
   const packages = [
-    { image: fire, title: "Visit Rwanda", text: "A 10 day experience" },
     {
       image: fire,
       video: pkgMovie,
+      title: "Visit Rwanda",
+      text: "A 10 day experience",
+    },
+    {
+      image: fire,
+      video: pkgMovie2,
       title: "Travel Uganda",
       text: "A 20 day experience",
     },
-    { image: fire, title: "Explore Tanzania", text: "A 12 day experience" },
+    {
+      image: fire,
+      video: pkgMovie,
+      title: "Explore Tanzania",
+      text: "A 12 day experience",
+    },
   ];
   return (
     <div
       className={`${
-        laptop ? "px-40 py-14" : mobile ? "px-4" : "px-64 py-16"
+        laptop ? "px-40 py-14" : mobile ? "px-6" : "px-64 py-16"
       } py-14 bg-orange-100 bg-opacity-15`}
     >
       <div className="w-full text-center font-semibold text-4xl pb-10">
         Your Packages
       </div>
-      <div className={`grid ${mobile ? "" : " grid-cols-3"} gap-14`}>
+      <div className={`grid ${mobile ? "gap-8" : " grid-cols-3 gap-14"}`}>
         {packages.map((pkg, index) => (
-          <div key={index} className={`flex flex-col text-center`}>
+          <div
+            key={index}
+            className={`flex flex-col text-center rounded-2xl overflow-hidden`}
+          >
             {pkg.video ? (
               <ReactPlayer
                 url={pkg.video}
@@ -44,7 +58,7 @@ export default function Videos() {
                 className="rounded-2xl"
               />
             )}
-            <span className="text-2xl font-semibold text-gray-800">
+            <span className="text-2xl pt-2 font-semibold text-gray-800">
               {pkg.title}
             </span>
             <span>{pkg.text}</span>

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { stateContext } from "../stateContext";
-import fire from "../assets/forest-tree.jpeg";
+import fire from "../assets/man.jpg";
 
 export default function Story() {
   const { mobile, laptop } = useContext(stateContext);
@@ -12,19 +12,21 @@ export default function Story() {
       } py-14 bg-green-700 bg-opacity-20`}
     >
       {!mobile ? null : (
-        <div className="w-full text-center font-semibold text-4xl pb-10">
+        <div className="w-full text-center font-semibold text-4xl pb-6">
           About me
         </div>
       )}
       <div
         className={`${
-          mobile ? "flex flex-col gap-5 text-justify" : "flex items-start gap-10"
+          mobile
+            ? "flex flex-col gap-2 text-justify"
+            : "flex items-start gap-10"
         }`}
       >
         <img
           src={fire}
           alt={"me"}
-          className={`${mobile ? "" : "w-1/2"} rounded-lg`}
+          className={`${mobile ? "px-5" : "w-1/2"} rounded-lg`}
         />
         <div className="w-full pt-5">
           {mobile ? null : (
@@ -47,7 +49,9 @@ export default function Story() {
             </p>
           </div>
           <div className="p-4 w-full flex items-center justify-center">
-            <span className={`px-5 py-2 bg-orange-300 font-semibold rounded-full hover:border hover:bg-orange-400 hover:text-white`}>
+            <span
+              className={`px-5 py-2 bg-orange-300 font-semibold rounded-full hover:border hover:bg-orange-400 hover:text-white`}
+            >
               Continue Reading
             </span>
           </div>

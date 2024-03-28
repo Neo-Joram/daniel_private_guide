@@ -11,48 +11,51 @@ import {
 import { AiFillApi } from "react-icons/ai";
 import {
   FaBars,
+  FaCarAlt,
   FaChevronDown,
   FaInstagram,
   FaLinkedin,
+  FaMapMarkerAlt,
+  FaQuestionCircle,
+  FaRoad,
   FaTimes,
   FaWhatsapp,
 } from "react-icons/fa";
 import { stateContext } from "../stateContext";
+import { Link } from "react-router-dom";
 
 export default function Navmenu() {
-  const { mobile, showMenu, setShowMenu } = useContext(stateContext);
+  const { mobile, showMenu, setShowMenu, active, setActive } =
+    useContext(stateContext);
   const [current, setCurrent] = useState(0);
-  const [active, setActive] = useState(0);
   const [isNavbarFixed, setIsNavbarFixed] = useState(false);
   const [previousScrollY, setPreviousScrollY] = useState(0);
 
   const items = [
-    { label: "Home", key: "home", icon: <MdHomeMax className="text-xl" /> },
+    {
+      label: "Home",
+      key: "home",
+      icon: <MdHomeMax className="text-xl" />,
+    },
     {
       label: "Services",
       key: "services",
       icon: <AiFillApi className="text-xl" />,
+      children: [
+        { label: "Travel", key: "travel", icon: <FaCarAlt /> },
+        { label: "FAQs", key: "FAQs", icon: <FaQuestionCircle /> },
+      ],
     },
-    { label: "About_Me", key: "about", icon: <MdBook className="text-xl" /> },
     {
       label: "Eplore",
       icon: <MdExplore className="text-xl" />,
       key: "explore",
       children: [
-        { label: "Destinations", icon: "" },
-        { label: "Explore places", icon: "" },
-        { label: "Videos", icon: "" },
+        { label: "Destinations", key: "destinations", icon: <FaRoad /> },
+        { label: "Places", key: "places", icon: <FaMapMarkerAlt /> },
       ],
     },
-    {
-      label: "More",
-      icon: <MdMore className="text-xl" />,
-      key: "more",
-      children: [
-        { label: "FAQs", icon: "" },
-        { label: "Packages", icon: "" },
-      ],
-    },
+    { label: "About_Me", key: "aboutMe", icon: <MdBook className="text-xl" /> },
   ];
 
   const social = [
@@ -76,7 +79,7 @@ export default function Navmenu() {
       setIsNavbarFixed(scrollY > 0 && !isScrollingUp);
       setPreviousScrollY(scrollY);
     };
-    
+
     const onScrollListener = window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", onScrollListener);
     // eslint-disable-next-line
@@ -100,7 +103,7 @@ export default function Navmenu() {
           >
             <div className="flex flex-col gap-4">
               {items.map((menu, index) => (
-                <a href={"#" + menu.label} key={index} className="flex gap-2">
+                <a href={"" + menu.label} key={index} className="flex gap-2">
                   {menu.icon}
                   {menu.label}
                 </a>
@@ -137,42 +140,49 @@ export default function Navmenu() {
                 {menu.children ? (
                   <div
                     className={`px-3 flex items-center gap-1 cursor-pointer ${
-                      active === index && "text-orange-500 border-b-[1px]"
+                      active.includes(menu.key) &&
+                      "text-orange-500 border-b-[1px]"
                     }`}
                   >
                     <span>{menu.label}</span>
                     <FaChevronDown className="ml-1" />
                   </div>
                 ) : (
-                  <a
-                    href={"#" + menu.label}
-                    onClick={() => setActive(index)}
+                  <Link
+                    to={"/" + menu.key}
                     className={`px-3 flex items-center gap-1 hover:text-orange-700 ${
-                      active === index && "text-orange-500 border-b-[1px]"
+                      (active.includes(menu.key) ||
+                        (active === "/" && index === 0)) &&
+                      "text-orange-500 border-b-[1px]"
                     }`}
+                    onClickCapture={() => setActive(menu.key)}
                   >
                     {menu.label}
-                  </a>
+                  </Link>
                 )}
 
                 {menu.children && current === index && (
                   <ul
                     className={`absolute shadow ${
-                      isNavbarFixed ? "bg-green-800 bg-opacity-90" : "bg-white"
+                      isNavbarFixed
+                        ? "bg-green-800 bg-opacity-90"
+                        : "bg-green-100/50"
                     }`}
                   >
                     {menu.children.map((sub, idx) => (
-                      <li
-                        onClick={() => setActive(index)}
-                        key={idx}
-                        className="list-none hover:text-orange-700"
-                      >
-                        <a
-                          href={"#" + sub.label}
-                          className={`px-3 pt-1 flex items-center gap-1`}
+                      <li key={idx} className="list-none hover:text-orange-700">
+                        <Link
+                          to={"/" + menu.key}
+                          className={`min-w-28 px-3 pt-1 flex items-center gap-1 ${
+                            active.includes(sub.key) &&
+                            "text-orange-500 border-b-[1px]"
+                          }`}
+                          onClickCapture={() =>
+                            setActive(menu.key + "/" + sub.key)
+                          }
                         >
                           {sub.icon} {sub.label}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>
