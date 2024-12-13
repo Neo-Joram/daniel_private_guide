@@ -6,7 +6,7 @@ export default function Footer() {
       className={`text-center w-full py-6 bg-gradient-to-t from-green-200 to-orange-50`}
     >
       <span className="text-gray-700 font-semibold">
-        @2024 | Daniel_Nishimwe
+        @2024 | Olivier
       </span>
     </div>
   );
