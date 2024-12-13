@@ -146,14 +146,14 @@ export default function Contact() {
             <div className="grid">
               <span>
                 Tel:{" "}
-                <a href="tel:+250782555259" className="text-blue-600">
-                  +250 782 555 259
+                <a href="tel:+250784438529" className="text-blue-600">
+                  +250 784 438 529
                 </a>
               </span>
               <span>
                 Email:{" "}
-                <a href="mailto:neojoram12@gmail.com" className="text-blue-600">
-                  neojoram12@gmail.com
+                <a href="mailto:odushimimanairakiza@gmail.com" className="text-blue-600">
+                  odushimimanairakiza@gmail.com
                 </a>
               </span>
             </div>
